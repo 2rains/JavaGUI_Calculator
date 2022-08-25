@@ -1,0 +1,176 @@
+ import java.awt.*;
+ import java.awt.event.*;
+import java.util.StringTokenizer;
+import java.lang.Math; 
+
+import javax.swing.*;
+ import javax.swing.event.*; 
+
+ public class Calculator extends JFrame{
+	 JButton[] btns = new JButton[16];
+	 JTextField tf = new JTextField("");
+	 JButton cBtn = new JButton("Clear");
+	 JButton eBtn = new JButton("Enter");
+	 //private JTextField inputSpace;
+	 private String num = "";
+	 
+	 public Calculator() { 
+		 setTitle("계산기"); 
+		 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 MyActionListener  ml = new MyActionListener();
+		 
+		 
+		 Container g = getContentPane(); 
+		 
+		 JPanel p1 = new JPanel();
+		 JPanel p2 = new JPanel();
+		 String num[] = {"1","2","3","+","4","5","6","-","7","8","9","*","0",".","%","/"};	 
+		 for(int i=0; i<16; i++) {
+			 btns[i] = new JButton(num[i]);
+			 btns[i].setFont(new Font("Arial", Font.ITALIC, 20));
+			 btns[i].setForeground(Color.BLACK);
+				btns[i].setBorderPainted(false);
+		 }
+
+		 g.setLayout(new BorderLayout());
+		 g.add(tf, BorderLayout.NORTH); 
+		 
+		 g.add(eBtn, BorderLayout.SOUTH);
+		 eBtn.addActionListener(ml);
+		 p1.setLayout(new BorderLayout());
+
+		 g.add(p1, BorderLayout.CENTER);
+		 
+		 p1.add(cBtn, BorderLayout.NORTH);
+		 cBtn.addActionListener(ml);
+		 p1.add(p2, BorderLayout.CENTER);
+		 p2.setLayout(new GridLayout(4,4,7,7));
+		 for(int i=0; i<16; i++) {
+			 p2.add(btns[i]);
+			 btns[i].addActionListener(ml);
+		 }
+		 setSize(300,400);
+		 setVisible(true);
+		 setResizable(false);
+	 }
+	 public class MyActionListener implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				JButton b = (JButton)e.getSource();
+				double num1=0, num2=0, result=0;
+				int iResult;
+				StringTokenizer st;
+				
+				if(b.getText().equals("1")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("2")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("3")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("4")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("5")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("6")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("7")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("8")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("9")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("0")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("/")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("*")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("+")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("-")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals("%")) {
+					tf.setText(tf.getText()+b.getText());
+				}else if(b.getText().equals(".")) {
+					tf.setText(tf.getText()+b.getText());
+				}
+				else if(b.getText().equals("Clear")) {
+					tf.setText("");
+				}else if(b.getText().equals("Enter")) {
+					String str = tf.getText();
+					if(str.contains("-")) {
+						st = new StringTokenizer(str,"-");
+						while(st.hasMoreTokens()) {
+						num1 = Double.parseDouble(st.nextToken());
+						num2 = Double.parseDouble(st.nextToken());
+						result = num1-num2;
+						if(result%1 == 0) { 
+							iResult = (int)Math.round(result);
+							str = Integer.toString(iResult);
+							tf.setText(str);
+						}else str = Double.toString(result);
+						tf.setText(str);
+						}
+					}else if(str.contains("+")) {
+						st = new StringTokenizer(str,"+");
+						while(st.hasMoreTokens()) {
+						num1 = Double.parseDouble(st.nextToken());
+						num2 = Double.parseDouble(st.nextToken());
+						result = num1+num2;
+						if(result%1 == 0) { 
+							iResult = (int)Math.round(result);
+							str = Integer.toString(iResult);
+							tf.setText(str);
+						}else str = Double.toString(result);
+						tf.setText(str);
+						}
+					}else if(str.contains("*")) {
+						st = new StringTokenizer(str,"*");
+						while(st.hasMoreTokens()) {
+						num1 = Double.parseDouble(st.nextToken());
+						num2 = Double.parseDouble(st.nextToken());
+						result = num1*num2;
+						if(result%1 == 0) { 
+							iResult = (int)Math.round(result);
+							str = Integer.toString(iResult);
+							tf.setText(str);
+						}else str = Double.toString(result);
+						tf.setText(str);
+						}
+					}else if(str.contains("/")) {
+						st = new StringTokenizer(str,"/");
+						while(st.hasMoreTokens()) {
+						num1 = Double.parseDouble(st.nextToken());
+						num2 = Double.parseDouble(st.nextToken());
+						result = num1/num2;
+						if(result%1 == 0) { 
+							iResult = (int)Math.round(result);
+							str = Integer.toString(iResult);
+							tf.setText(str);
+						}else str = Double.toString(result);
+						tf.setText(str);
+						}
+					}else if(str.contains("%")) {
+						st = new StringTokenizer(str,"%");
+						while(st.hasMoreTokens()) {
+						num1 = Double.parseDouble(st.nextToken());
+						num2 = Double.parseDouble(st.nextToken());
+						result = num1%num2;
+						if(result%1 == 0) { 
+							iResult = (int)Math.round(result);
+							str = Integer.toString(iResult);
+							tf.setText(str);
+						}else str = Double.toString(result);
+						tf.setText(str);
+						}
+					}
+				}
+			}
+		}	 
+	 
+	public static void main(String[] args) {
+		Calculator g = new Calculator();
+		
+		
+	}
+
+}
